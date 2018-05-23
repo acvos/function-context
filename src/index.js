@@ -1,33 +1,14 @@
 var curry = require('curry')
 var getValue = require('get-value')
 var setValue = require('object-path-immutable').set
+var context = require('./context')
 
-function State(value, initialState) {
-  this.value = value
-
-  if (typeof initialState !== 'object') {
-    throw new Error('[SimpleState] Scope must be an object, got ' + (typeof initialState))
-  }
-
-  if (initialState instanceof State) {
-    this.scope = initialState.scope
-  } else {
-    this.scope = initialState
-  }
-}
-
-function createState(data) {
-  if (data instanceof State) {
-    return data
-  }
-
-  return new State(undefined, data || {})
-}
+const Context = context.class
 
 function get(path, state) {
   var oldState = createState(state)
 
-  return new State(
+  return new Context(
     getValue(oldState.scope, path),
     oldState
   )
@@ -36,7 +17,7 @@ function get(path, state) {
 function set(path, value, state) {
   var oldState = createState(state)
 
-  return new State(
+  return new Context(
     oldState.value,
     setValue(oldState.scope, path, value)
   )
@@ -45,7 +26,7 @@ function set(path, value, state) {
 function store(path, state) {
   var oldState = createState(state)
 
-  return new State(
+  return new Context(
     oldState.value,
     setValue(oldState.scope, path, oldState.value)
   )
@@ -60,13 +41,13 @@ function lift(f) {
       return result
     }
 
-    return new State(result, oldState)
+    return new Context(result, oldState)
   }
 }
 
 module.exports = {
-  createState: createState,
-  State: State,
+  Context: context.class,
+  createContext: context.create,
   get: curry(get),
   set: curry(set),
   store: curry(store),

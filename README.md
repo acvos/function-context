@@ -1,2 +1,2 @@
-# simple-state
-Stateful computation for functional style JS
+# function-context
+Contextual computation for functional style JS

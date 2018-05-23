@@ -1,21 +1,23 @@
 {
-  "name": "simple-state",
-  "description": "Stateful computation for functional style JS",
+  "name": "function-context",
+  "description": "Contextual computation for functional style JS",
   "keywords": [
-    "map",
-    "object map",
-    "array map",
-    "promise",
-    "async map",
+    "state",
+    "store",
+    "monad",
+    "comonad",
+    "context",
+    "pipeline",
     "functional programming"
   ],
   "version": "0.0.1",
   "scripts": {
     "test": "jest"
   },
+  "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/acvos/simple-state.git"
+    "url": "https://github.com/acvos/function-context.git"
   },
   "author": "Anton Chernikov <achernikov@acvos.com>",
   "dependencies": {
