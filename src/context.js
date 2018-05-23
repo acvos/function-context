@@ -8,7 +8,7 @@ function Context(value, initialState) {
     throw new Error('[SimpleState] Context must be an object, got ' + (typeof initialState))
   }
 
-  if (initialState instanceof State) {
+  if (initialState instanceof Context) {
     this.scope = initialState.scope
   } else {
     this.scope = initialState
